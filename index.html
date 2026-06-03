@@ -8,47 +8,155 @@
   <style>
     * { box-sizing: border-box; }
 
-    body { margin: 0; font-family: Arial, sans-serif; background: #f3f6fb; color: #111827; }
-    header { background: linear-gradient(135deg, #2563eb, #7c3aed); color: white; padding: 28px 16px; text-align: center; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f3f6fb;
+      color: #111827;
+    }
+
+    header {
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      color: white;
+      padding: 28px 16px;
+      text-align: center;
+    }
+
     header h1 { margin: 0; font-size: 32px; }
     header p { margin: 10px 0 0; font-size: 16px; }
 
-    nav { display: flex; gap: 8px; overflow-x: auto; padding: 14px 10px; background: white; border-bottom: 1px solid #ddd; position: sticky; top: 0; z-index: 10; }
-    nav button { border: 0; padding: 10px 16px; border-radius: 999px; font-weight: bold; cursor: pointer; background: #e5e7eb; white-space: nowrap; }
-    nav button.active { background: #2563eb; color: white; }
+    nav {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 14px 10px;
+      background: white;
+      border-bottom: 1px solid #ddd;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
 
-    main { max-width: 1100px; margin: auto; padding: 20px; }
+    nav button {
+      border: 0;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-weight: bold;
+      cursor: pointer;
+      background: #e5e7eb;
+      white-space: nowrap;
+    }
+
+    nav button.active {
+      background: #2563eb;
+      color: white;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: auto;
+      padding: 20px;
+    }
+
     section { display: none; }
     section.active { display: block; }
 
-    .card { background: white; border-radius: 18px; padding: 20px; margin-bottom: 18px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+    .card {
+      background: white;
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 18px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+
     h2, h3 { margin-top: 0; }
 
-    input, select, textarea { width: 100%; padding: 12px; margin: 7px 0 14px; border: 1px solid #d1d5db; border-radius: 10px; font-size: 15px; }
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 7px 0 14px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      font-size: 15px;
+    }
+
     textarea { min-height: 90px; }
 
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
-    .quick-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
 
-    .quick-btn, .primary, .danger, .success, .small-btn { border: 0; border-radius: 12px; padding: 12px; font-weight: bold; cursor: pointer; }
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+    }
+
+    .quick-btn, .primary, .danger, .success, .small-btn {
+      border: 0;
+      border-radius: 12px;
+      padding: 12px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
     .quick-btn { background: #eef2ff; }
     .primary { background: #2563eb; color: white; width: 100%; }
     .success { background: #16a34a; color: white; }
     .danger { background: #dc2626; color: white; }
     .small-btn { background: #e5e7eb; }
 
-    .request { border-left: 6px solid #2563eb; padding: 14px; background: #f9fafb; border-radius: 12px; margin-bottom: 12px; }
+    .request {
+      border-left: 6px solid #2563eb;
+      padding: 14px;
+      background: #f9fafb;
+      border-radius: 12px;
+      margin-bottom: 12px;
+    }
+
     .urgent { border-left-color: #dc2626; }
     .important { border-left-color: #f59e0b; }
     .normal { border-left-color: #2563eb; }
 
-    .meta { color: #6b7280; font-size: 13px; margin-bottom: 8px; }
-    .points { font-size: 26px; font-weight: bold; color: #2563eb; }
-    .row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
-    .tag { display: inline-block; background: #dbeafe; color: #1e40af; padding: 4px 9px; border-radius: 999px; font-size: 12px; font-weight: bold; }
-    footer { text-align: center; color: #6b7280; padding: 25px; }
+    .meta {
+      color: #6b7280;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .points {
+      font-size: 26px;
+      font-weight: bold;
+      color: #2563eb;
+    }
+
+    .row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #dbeafe;
+      color: #1e40af;
+      padding: 4px 9px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      color: #6b7280;
+      padding: 25px;
+    }
   </style>
 </head>
+
 <body>
   <header>
     <h1>🏠 Family Points Hub</h1>
@@ -66,18 +174,36 @@
 
   <main>
     <section id="dashboard" class="active">
-      <div class="card"><h2>👨‍👩‍👧‍👦 Current Points</h2><div id="pointsBoard" class="grid"></div></div>
+      <div class="card">
+        <h2>👨‍👩‍👧‍👦 Current Points</h2>
+        <div id="pointsBoard" class="grid"></div>
+      </div>
+
       <div class="grid">
-        <div class="card"><h2>📌 Latest Active Requests</h2><div id="latestRequests"></div></div>
-        <div class="card"><h2>🏆 Leaderboard</h2><div id="leaderboard"></div></div>
+        <div class="card">
+          <h2>📌 Latest Active Requests</h2>
+          <div id="latestRequests"></div>
+        </div>
+
+        <div class="card">
+          <h2>🏆 Leaderboard</h2>
+          <div id="leaderboard"></div>
+        </div>
       </div>
     </section>
 
     <section id="requests">
       <div class="card">
         <h2>⚡ Quick Requests</h2>
+
         <label><b>Current User</b></label>
-        <select id="currentUser"><option>Aidan</option><option>Megan</option><option>Mum</option><option>Dad</option></select>
+        <select id="currentUser">
+          <option>Aidan</option>
+          <option>Megan</option>
+          <option>Mum</option>
+          <option>Dad</option>
+        </select>
+
         <div class="quick-grid">
           <button class="quick-btn" onclick="quickRequest('Buy Milk','Can someone help buy milk?',10,'Errand')">🛒 Buy Milk</button>
           <button class="quick-btn" onclick="quickRequest('Buy Dinner','Can someone buy dinner?',15,'Errand')">🍔 Buy Dinner</button>
@@ -92,37 +218,107 @@
 
       <div class="card">
         <h2>✍️ Custom Request</h2>
-        <label>Name</label><select id="requestName"><option>Aidan</option><option>Megan</option><option>Mum</option><option>Dad</option></select>
-        <label>Title</label><input id="requestTitle" placeholder="e.g. Walk dogs" />
-        <label>Message</label><textarea id="requestMessage" placeholder="Write request here..."></textarea>
-        <label>Category</label><select id="requestCategory"><option>General</option><option>Dogs</option><option>Errand</option><option>Transport</option><option>Food</option><option>Money</option><option>School</option><option>Reward</option></select>
-        <label>Priority</label><select id="requestPriority"><option>normal</option><option>important</option><option>urgent</option></select>
-        <label>Points if accepted</label><input id="requestPoints" type="number" value="10" />
-        <label>Proof / Photo link optional</label><input id="requestProof" placeholder="Paste image link or note here" />
+        <label>Name</label>
+        <select id="requestName">
+          <option>Aidan</option>
+          <option>Megan</option>
+          <option>Mum</option>
+          <option>Dad</option>
+        </select>
+
+        <label>Title</label>
+        <input id="requestTitle" placeholder="e.g. Walk dogs" />
+
+        <label>Message</label>
+        <textarea id="requestMessage" placeholder="Write request here..."></textarea>
+
+        <label>Category</label>
+        <select id="requestCategory">
+          <option>General</option>
+          <option>Dogs</option>
+          <option>Errand</option>
+          <option>Transport</option>
+          <option>Food</option>
+          <option>Money</option>
+          <option>School</option>
+          <option>Reward</option>
+        </select>
+
+        <label>Priority</label>
+        <select id="requestPriority">
+          <option>normal</option>
+          <option>important</option>
+          <option>urgent</option>
+        </select>
+
+        <label>Points if accepted</label>
+        <input id="requestPoints" type="number" value="10" />
+
+        <label>Proof / Photo link optional</label>
+        <input id="requestProof" placeholder="Paste image link or note here" />
+
         <button class="primary" onclick="submitRequest()">Post Request</button>
       </div>
 
-      <div class="card"><h2>📋 All Active Requests</h2><div id="allRequests"></div></div>
+      <div class="card">
+        <h2>📋 All Active Requests</h2>
+        <div id="allRequests"></div>
+      </div>
     </section>
 
-    <section id="earn"><div class="card"><h2>🎯 Earn Points</h2><div class="grid" id="earnList"></div></div></section>
-    <section id="rewards"><div class="card"><h2>🎁 Reward Store</h2><div class="grid" id="rewardStore"></div></div></section>
-    <section id="archive"><div class="card"><h2>✅ Accepted / Rejected Archive</h2><div id="archiveList"></div></div></section>
+    <section id="earn">
+      <div class="card">
+        <h2>🎯 Earn Points</h2>
+        <div class="grid" id="earnList"></div>
+      </div>
+    </section>
+
+    <section id="rewards">
+      <div class="card">
+        <h2>🎁 Reward Store</h2>
+        <div class="grid" id="rewardStore"></div>
+      </div>
+    </section>
+
+    <section id="archive">
+      <div class="card">
+        <h2>✅ Accepted / Rejected Archive</h2>
+        <div id="archiveList"></div>
+      </div>
+    </section>
 
     <section id="settings">
       <div class="card">
         <h2>⚙️ Admin Settings</h2>
+
         <button class="primary" onclick="showAdmin()">Admin Login</button>
-        <div id="adminPanel" style="display:none; margin-top:15px;"><button class="danger" onclick="resetAll()">Reset All Data</button></div>
+
+        <div id="adminPanel" style="display:none; margin-top:15px;">
+          <button class="danger" onclick="resetAll()">Reset All Data</button>
+        </div>
       </div>
     </section>
   </main>
 
-  <footer>Install on phone through browser menu → Add to Home Screen.</footer>
+  <footer>
+    Install on phone through browser menu → Add to Home Screen.
+  </footer>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
-    import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, doc, updateDoc, deleteDoc, getDocs, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+    import {
+      getFirestore,
+      collection,
+      addDoc,
+      onSnapshot,
+      query,
+      orderBy,
+      doc,
+      updateDoc,
+      deleteDoc,
+      getDocs,
+      serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyCDl-9MnO2K6MaK61pm_wi6QyJVEJVaNYI",
@@ -135,13 +331,49 @@
 
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
+
     const members = ["Aidan", "Megan", "Mum", "Dad"];
     let requests = [];
     let points = {};
     let archive = [];
 
-    const earnTasks = [["🐩 Walk Liang Liang",10],["🐩 Walk Jing Jing",10],["🐩 Walk Both Dogs",25],["🍚 Feed Dogs",5],["🧹 Clean Up After Dogs",10],["🍽️ Wash Dishes",10],["🧼 Vacuum House",15],["🗑️ Take Out Trash",10],["🛏️ Clean Room",15],["👕 Fold Laundry",15],["🛒 Buy Milk",10],["🍔 Buy Dinner",15],["🛍️ Buy Groceries",25],["📦 Collect Parcel",10],["📚 Homework Completed",10],["📖 Revision Session",10],["🏆 Good Test Result",30],["👏 Teacher Praise",20]];
-    const rewards = [["🎮 Xbox Session",20],["🎮 Extra Xbox Session",30],["🎮 Weekend Gaming Pass",60],["🍦 Ice Cream",15],["🧋 Bubble Tea",25],["🍔 McDonald's",50],["🍽️ Favourite Dinner",75],["💵 $2 Bonus",20],["💵 $5 Bonus",50],["💵 $10 Bonus",100],["📱 +30 mins Screen Time",20],["📱 +1 hour Screen Time",40],["🎬 Choose Family Movie",30],["🛌 Stay Up 30 mins Later",40]];
+    const earnTasks = [
+      ["🐩 Walk Liang Liang", 10],
+      ["🐩 Walk Jing Jing", 10],
+      ["🐩 Walk Both Dogs", 25],
+      ["🍚 Feed Dogs", 5],
+      ["🧹 Clean Up After Dogs", 10],
+      ["🍽️ Wash Dishes", 10],
+      ["🧼 Vacuum House", 15],
+      ["🗑️ Take Out Trash", 10],
+      ["🛏️ Clean Room", 15],
+      ["👕 Fold Laundry", 15],
+      ["🛒 Buy Milk", 10],
+      ["🍔 Buy Dinner", 15],
+      ["🛍️ Buy Groceries", 25],
+      ["📦 Collect Parcel", 10],
+      ["📚 Homework Completed", 10],
+      ["📖 Revision Session", 10],
+      ["🏆 Good Test Result", 30],
+      ["👏 Teacher Praise", 20]
+    ];
+
+    const rewards = [
+      ["🎮 Xbox Session", 20],
+      ["🎮 Extra Xbox Session", 30],
+      ["🎮 Weekend Gaming Pass", 60],
+      ["🍦 Ice Cream", 15],
+      ["🧋 Bubble Tea", 25],
+      ["🍔 McDonald's", 50],
+      ["🍽️ Favourite Dinner", 75],
+      ["💵 $2 Bonus", 20],
+      ["💵 $5 Bonus", 50],
+      ["💵 $10 Bonus", 100],
+      ["📱 +30 mins Screen Time", 20],
+      ["📱 +1 hour Screen Time", 40],
+      ["🎬 Choose Family Movie", 30],
+      ["🛌 Stay Up 30 mins Later", 40]
+    ];
 
     window.showTab = function(tabId, btn) {
       document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
@@ -152,7 +384,17 @@
 
     window.quickRequest = async function(title, message, pts, category) {
       const name = document.getElementById("currentUser").value || "Aidan";
-      await addDoc(collection(db, "requests"), { name, title, message, category, priority: title.includes("Now") ? "urgent" : "normal", points: pts, proof: "", status: "active", createdAt: serverTimestamp() });
+      await addDoc(collection(db, "requests"), {
+        name,
+        title,
+        message,
+        category,
+        priority: title.includes("Now") ? "urgent" : "normal",
+        points: pts,
+        proof: "",
+        status: "active",
+        createdAt: serverTimestamp()
+      });
     };
 
     window.submitRequest = async function() {
@@ -163,89 +405,236 @@
       const priority = document.getElementById("requestPriority").value;
       const pts = Number(document.getElementById("requestPoints").value || 0);
       const proof = document.getElementById("requestProof").value.trim();
-      if (!title || !message) return alert("Please fill in title and message.");
-      await addDoc(collection(db, "requests"), { name, title, message, category, priority, points: pts, proof, status: "active", createdAt: serverTimestamp() });
+
+      if (!title || !message) {
+        alert("Please fill in title and message.");
+        return;
+      }
+
+      await addDoc(collection(db, "requests"), {
+        name,
+        title,
+        message,
+        category,
+        priority,
+        points: pts,
+        proof,
+        status: "active",
+        createdAt: serverTimestamp()
+      });
+
       document.getElementById("requestTitle").value = "";
       document.getElementById("requestMessage").value = "";
       document.getElementById("requestProof").value = "";
     };
 
     window.approveRequest = async function(id, name, pts) {
-      const acceptedBy = document.getElementById("currentUser").value || "Family Member";
-      await updateDoc(doc(db, "requests", id), { status: "accepted", acceptedBy, acceptedAt: serverTimestamp() });
-      await addDoc(collection(db, "points"), { name, points: pts, reason: "Accepted by " + acceptedBy, createdAt: serverTimestamp() });
+      const defaultName = document.getElementById("currentUser").value || "Family Member";
+      const acceptedBy = prompt("Who is accepting this request?", defaultName);
+
+      if (!acceptedBy || acceptedBy.trim() === "") return;
+
+      await updateDoc(doc(db, "requests", id), {
+        status: "accepted",
+        acceptedBy: acceptedBy.trim(),
+        acceptedAt: serverTimestamp()
+      });
+
+      await addDoc(collection(db, "points"), {
+        name,
+        points: pts,
+        reason: "Accepted by " + acceptedBy.trim(),
+        createdAt: serverTimestamp()
+      });
     };
 
     window.rejectRequest = async function(id) {
-      const rejectedBy = document.getElementById("currentUser").value || "Family Member";
-      await updateDoc(doc(db, "requests", id), { status: "rejected", rejectedBy, acceptedAt: serverTimestamp() });
+      const defaultName = document.getElementById("currentUser").value || "Family Member";
+      const rejectedBy = prompt("Who is rejecting this request?", defaultName);
+
+      if (!rejectedBy || rejectedBy.trim() === "") return;
+
+      await updateDoc(doc(db, "requests", id), {
+        status: "rejected",
+        rejectedBy: rejectedBy.trim(),
+        acceptedAt: serverTimestamp()
+      });
     };
 
     window.claimTask = async function(task, pts) {
       const name = document.getElementById("currentUser").value || "Aidan";
-      await addDoc(collection(db, "requests"), { name, title: task, message: "Task completed. Please accept to award points.", category: "Earn Points", priority: "normal", points: pts, proof: "", status: "active", createdAt: serverTimestamp() });
+      await addDoc(collection(db, "requests"), {
+        name,
+        title: task,
+        message: "Task completed. Please accept to award points.",
+        category: "Earn Points",
+        priority: "normal",
+        points: pts,
+        proof: "",
+        status: "active",
+        createdAt: serverTimestamp()
+      });
     };
 
     window.redeemReward = async function(reward, cost) {
       const name = document.getElementById("currentUser").value || "Aidan";
-      await addDoc(collection(db, "requests"), { name, title: reward, message: `Request to redeem reward for ${cost} points.`, category: "Reward", priority: "normal", points: -cost, proof: "", status: "active", createdAt: serverTimestamp() });
+      await addDoc(collection(db, "requests"), {
+        name,
+        title: reward,
+        message: `Request to redeem reward for ${cost} points.`,
+        category: "Reward",
+        priority: "normal",
+        points: -cost,
+        proof: "",
+        status: "active",
+        createdAt: serverTimestamp()
+      });
     };
 
     window.resetAll = async function() {
       const pin = prompt("Enter Admin PIN");
       if (pin !== "0804") return alert("Wrong PIN.");
+
       if (!confirm("Delete all requests and points?")) return;
+
       const reqSnap = await getDocs(collection(db, "requests"));
       reqSnap.forEach(d => deleteDoc(doc(db, "requests", d.id)));
+
       const ptsSnap = await getDocs(collection(db, "points"));
       ptsSnap.forEach(d => deleteDoc(doc(db, "points", d.id)));
+
       alert("Reset complete.");
     };
 
     window.showAdmin = function() {
       const pin = prompt("Enter Admin PIN");
-      if (pin === "0804") document.getElementById("adminPanel").style.display = "block";
-      else alert("Wrong PIN");
+
+      if(pin === "0804"){
+        document.getElementById("adminPanel").style.display = "block";
+      } else {
+        alert("Wrong PIN");
+      }
     };
 
     function formatDate(data) {
       if (!data.createdAt || !data.createdAt.toDate) return "Just now";
-      return data.createdAt.toDate().toLocaleString("en-SG", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" });
+      return data.createdAt.toDate().toLocaleString("en-SG", {
+        day: "2-digit",
+        month: "short",
+        hour: "2-digit",
+        minute: "2-digit"
+      });
     }
+
     function formatAcceptedDate(data) {
       if (!data.acceptedAt || !data.acceptedAt.toDate) return "";
-      return data.acceptedAt.toDate().toLocaleString("en-SG", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" });
+      return data.acceptedAt.toDate().toLocaleString("en-SG", {
+        day: "2-digit",
+        month: "short",
+        hour: "2-digit",
+        minute: "2-digit"
+      });
     }
 
     function renderRequest(r, showButtons = true) {
       const cls = r.priority || "normal";
-      const statusLine = r.status === "accepted" ? `<p><span class="tag">Accepted</span> Accepted by ${r.acceptedBy || "Family Member"} ${formatAcceptedDate(r) ? "• " + formatAcceptedDate(r) : ""}</p>` : r.status === "rejected" ? `<p><span class="tag">Rejected</span> Rejected by ${r.rejectedBy || "Family Member"} ${formatAcceptedDate(r) ? "• " + formatAcceptedDate(r) : ""}</p>` : "";
-      return `<div class="request ${cls}"><div class="meta">${formatDate(r)} • Requested by ${r.name} • ${r.category || "General"}</div><h3>${r.title}</h3><p>${r.message}</p>${r.proof ? `<p><span class="tag">Proof</span> ${r.proof}</p>` : ""}<p><b>Points:</b> ${r.points}</p>${statusLine}${showButtons ? `<div class="row"><button class="success" onclick="approveRequest('${r.id}','${r.name}',${r.points})">✅ I'll Do It</button><button class="danger" onclick="rejectRequest('${r.id}')">❌ Can't Do It</button></div>` : ""}</div>`;
+      const statusLine = r.status === "accepted"
+        ? `<p><span class="tag">Accepted</span> Accepted by ${r.acceptedBy || "Family Member"} ${formatAcceptedDate(r) ? "• " + formatAcceptedDate(r) : ""}</p>`
+        : r.status === "rejected"
+          ? `<p><span class="tag">Rejected</span> Rejected by ${r.rejectedBy || "Family Member"} ${formatAcceptedDate(r) ? "• " + formatAcceptedDate(r) : ""}</p>`
+          : "";
+
+      return `
+        <div class="request ${cls}">
+          <div class="meta">${formatDate(r)} • Requested by ${r.name} • ${r.category || "General"}</div>
+          <h3>${r.title}</h3>
+          <p>${r.message}</p>
+          ${r.proof ? `<p><span class="tag">Proof</span> ${r.proof}</p>` : ""}
+          <p><b>Points:</b> ${r.points}</p>
+          ${statusLine}
+          ${showButtons ? `
+            <div class="row">
+              <button class="success" onclick="approveRequest('${r.id}','${r.name}',${r.points})">✅ I'll Do It</button>
+              <button class="danger" onclick="rejectRequest('${r.id}')">❌ Can't Do It</button>
+            </div>
+          ` : ""}
+        </div>
+      `;
     }
 
     function render() {
       const active = requests.filter(r => r.status === "active");
       archive = requests.filter(r => r.status !== "active");
-      document.getElementById("latestRequests").innerHTML = active.slice(0, 5).map(r => renderRequest(r)).join("") || "No active requests.";
-      document.getElementById("allRequests").innerHTML = active.map(r => renderRequest(r)).join("") || "No active requests.";
-      document.getElementById("archiveList").innerHTML = archive.map(r => renderRequest(r, false)).join("") || "Archive is empty.";
-      document.getElementById("pointsBoard").innerHTML = members.map(m => `<div class="card"><h3>${m}</h3><div class="points">${points[m] || 0} pts</div></div>`).join("");
+
+      document.getElementById("latestRequests").innerHTML =
+        active.slice(0, 5).map(r => renderRequest(r)).join("") || "No active requests.";
+
+      document.getElementById("allRequests").innerHTML =
+        active.map(r => renderRequest(r)).join("") || "No active requests.";
+
+      document.getElementById("archiveList").innerHTML =
+        archive.map(r => renderRequest(r, false)).join("") || "Archive is empty.";
+
+      document.getElementById("pointsBoard").innerHTML = members.map(m => `
+        <div class="card">
+          <h3>${m}</h3>
+          <div class="points">${points[m] || 0} pts</div>
+        </div>
+      `).join("");
+
       const sorted = [...members].sort((a,b) => (points[b] || 0) - (points[a] || 0));
-      document.getElementById("leaderboard").innerHTML = sorted.map((m, i) => `<p><b>${i + 1}. ${m}</b> — ${points[m] || 0} pts</p>`).join("");
+      document.getElementById("leaderboard").innerHTML = sorted.map((m, i) => `
+        <p><b>${i + 1}. ${m}</b> — ${points[m] || 0} pts</p>
+      `).join("");
     }
 
     function renderStaticLists() {
-      document.getElementById("earnList").innerHTML = earnTasks.map(([task, pts]) => `<div class="card"><h3>${task}</h3><p><b>Earn:</b> ${pts} pts</p><button class="primary" onclick="claimTask('${task}',${pts})">Claim Points</button></div>`).join("");
-      document.getElementById("rewardStore").innerHTML = rewards.map(([reward, cost]) => `<div class="card"><h3>${reward}</h3><p><b>Cost:</b> ${cost} pts</p><button class="primary" onclick="redeemReward('${reward}',${cost})">Redeem</button></div>`).join("");
+      document.getElementById("earnList").innerHTML = earnTasks.map(([task, pts]) => `
+        <div class="card">
+          <h3>${task}</h3>
+          <p><b>Earn:</b> ${pts} pts</p>
+          <button class="primary" onclick="claimTask('${task}',${pts})">Claim Points</button>
+        </div>
+      `).join("");
+
+      document.getElementById("rewardStore").innerHTML = rewards.map(([reward, cost]) => `
+        <div class="card">
+          <h3>${reward}</h3>
+          <p><b>Cost:</b> ${cost} pts</p>
+          <button class="primary" onclick="redeemReward('${reward}',${cost})">Redeem</button>
+        </div>
+      `).join("");
     }
 
     const userSelect = document.getElementById("currentUser");
     const savedUser = localStorage.getItem("familyUser");
-    if (savedUser) userSelect.value = savedUser;
-    userSelect.addEventListener("change", () => localStorage.setItem("familyUser", userSelect.value));
+    if (savedUser) {
+      userSelect.value = savedUser;
+    }
+    userSelect.addEventListener("change", () => {
+      localStorage.setItem("familyUser", userSelect.value);
+    });
 
-    onSnapshot(query(collection(db, "requests"), orderBy("createdAt", "desc")), snapshot => { requests = snapshot.docs.map(d => ({ id: d.id, ...d.data() })); render(); });
-    onSnapshot(query(collection(db, "points"), orderBy("createdAt", "desc")), snapshot => { points = {}; members.forEach(m => points[m] = 0); snapshot.docs.forEach(d => { const data = d.data(); points[data.name] = (points[data.name] || 0) + Number(data.points || 0); }); render(); });
+    onSnapshot(
+      query(collection(db, "requests"), orderBy("createdAt", "desc")),
+      snapshot => {
+        requests = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+        render();
+      }
+    );
+
+    onSnapshot(
+      query(collection(db, "points"), orderBy("createdAt", "desc")),
+      snapshot => {
+        points = {};
+        members.forEach(m => points[m] = 0);
+        snapshot.docs.forEach(d => {
+          const data = d.data();
+          points[data.name] = (points[data.name] || 0) + Number(data.points || 0);
+        });
+        render();
+      }
+    );
 
     renderStaticLists();
     render();
