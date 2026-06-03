@@ -194,6 +194,13 @@
     <section id="requests">
       <div class="card">
         <h2>⚡ Quick Requests</h2>
+<label>Current User</label>
+<select id="currentUser">
+  <option>Aidan</option>
+  <option>Megan</option>
+  <option>Mum</option>
+  <option>Dad</option>
+</select>
         <div class="quick-grid">
           <button class="quick-btn" onclick="quickRequest('Buy Milk','Can someone help buy milk?',10,'Errand')">🛒 Buy Milk</button>
           <button class="quick-btn" onclick="quickRequest('Buy Dinner','Can someone buy dinner?',15,'Errand')">🍔 Buy Dinner</button>
@@ -369,7 +376,7 @@
     };
 
     window.quickRequest = async function(title, message, pts, category) {
-      const name = prompt("Who is making this request?", "Aidan") || "Aidan";
+      const name = document.getElementById("currentUser").value || "Aidan";
       await addDoc(collection(db, "requests"), {
         name,
         title,
@@ -441,7 +448,7 @@
     };
 
     window.claimTask = async function(task, pts) {
-      const name = prompt("Who completed this task?", "Aidan") || "Aidan";
+      const name = document.getElementById("currentUser").value || "Aidan";
       await addDoc(collection(db, "requests"), {
         name,
         title: task,
@@ -456,7 +463,7 @@
     };
 
     window.redeemReward = async function(reward, cost) {
-      const name = prompt("Who wants to redeem this reward?", "Aidan") || "Aidan";
+      const name = document.getElementById("currentUser").value;
       await addDoc(collection(db, "requests"), {
         name,
         title: reward,
