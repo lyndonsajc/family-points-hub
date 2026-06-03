@@ -284,13 +284,22 @@
       </div>
     </section>
 
-    <section id="settings">
-      <div class="card">
-        <h2>⚙️ Admin Settings</h2>
-        <p>Admin PIN: <b>0804</b></p>
-        <button class="danger" onclick="resetAll()">Reset All Data</button>
-      </div>
-    </section>
+<section id="settings">
+  <div class="card">
+    <h2>⚙️ Admin Settings</h2>
+
+    <button class="primary" onclick="showAdmin()">
+      Admin Login
+    </button>
+
+    <div id="adminPanel" style="display:none; margin-top:15px;">
+      <button class="danger" onclick="resetAll()">
+        Reset All Data
+      </button>
+    </div>
+
+  </div>
+</section>
   </main>
 
   <footer>
