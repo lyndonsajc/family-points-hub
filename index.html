@@ -582,21 +582,31 @@
       }
     );
 
-    onSnapshot(
-      query(collection(db, "points"), orderBy("createdAt", "desc")),
-      snapshot => {
-        points = {};
-        members.forEach(m => points[m] = 0);
-        snapshot.docs.forEach(d => {
-          const data = d.data();
-          points[data.name] = (points[data.name] || 0) + Number(data.points || 0);
-        });
-        render();
-      }
-    );
-
-    renderStaticLists();
+onSnapshot(
+  query(collection(db, "points"), orderBy("createdAt", "desc")),
+  snapshot => {
+    points = {};
+    members.forEach(m => points[m] = 0);
+    snapshot.docs.forEach(d => {
+      const data = d.data();
+      points[data.name] = (points[data.name] || 0) + Number(data.points || 0);
+    });
     render();
+  }
+);
+
+window.showAdmin = function() {
+  const pin = prompt("Enter Admin PIN");
+
+  if(pin === "0804"){
+    document.getElementById("adminPanel").style.display = "block";
+  } else {
+    alert("Wrong PIN");
+  }
+};
+
+renderStaticLists();
+render();
   </script>
 </body>
 </html>
