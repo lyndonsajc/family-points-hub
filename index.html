@@ -4,738 +4,583 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Family Points Hub</title>
-  <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#2563eb" />
-  <style>
-    :root {
-      --bg: #f5f7fb;
-      --card: #ffffff;
-      --text: #111827;
-      --muted: #6b7280;
-      --primary: #2563eb;
-      --primary-dark: #1d4ed8;
-      --green: #16a34a;
-      --red: #dc2626;
-      --orange: #f97316;
-      --yellow: #facc15;
-      --border: #e5e7eb;
-      --shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
-    }
 
+  <style>
     * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: var(--bg);
-      color: var(--text);
+      font-family: Arial, sans-serif;
+      background: #f3f6fb;
+      color: #111827;
     }
 
     header {
       background: linear-gradient(135deg, #2563eb, #7c3aed);
       color: white;
-      padding: 24px 16px;
+      padding: 28px 16px;
       text-align: center;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      box-shadow: var(--shadow);
     }
 
-    header h1 { margin: 0; font-size: 1.8rem; }
-    header p { margin: 6px 0 0; opacity: 0.95; }
+    header h1 { margin: 0; font-size: 32px; }
+    header p { margin: 10px 0 0; font-size: 16px; }
 
     nav {
       display: flex;
       gap: 8px;
       overflow-x: auto;
-      padding: 12px;
+      padding: 14px 10px;
       background: white;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid #ddd;
       position: sticky;
-      top: 92px;
-      z-index: 9;
+      top: 0;
+      z-index: 10;
     }
 
-    nav button, .btn {
-      border: none;
+    nav button {
+      border: 0;
+      padding: 10px 16px;
       border-radius: 999px;
-      padding: 10px 14px;
-      background: #e5e7eb;
-      color: #111827;
-      font-weight: 700;
+      font-weight: bold;
       cursor: pointer;
-      white-space: nowrap;
+      background: #e5e7eb;
     }
 
-    nav button.active, .btn.primary {
-      background: var(--primary);
+    nav button.active {
+      background: #2563eb;
       color: white;
     }
 
-    .container {
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 16px;
+    main {
+      max-width: 1100px;
+      margin: auto;
+      padding: 20px;
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 16px;
-    }
+    section { display: none; }
+    section.active { display: block; }
 
     .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 16px;
-      box-shadow: var(--shadow);
+      background: white;
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 18px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
     }
-
-    .span-4 { grid-column: span 4; }
-    .span-6 { grid-column: span 6; }
-    .span-8 { grid-column: span 8; }
-    .span-12 { grid-column: span 12; }
 
     h2, h3 { margin-top: 0; }
-    .muted { color: var(--muted); }
-
-    label {
-      display: block;
-      font-weight: 700;
-      margin: 10px 0 6px;
-    }
 
     input, select, textarea {
       width: 100%;
-      padding: 11px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      font-size: 1rem;
-      background: white;
+      padding: 12px;
+      margin: 7px 0 14px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      font-size: 15px;
     }
 
-    textarea { min-height: 90px; resize: vertical; }
+    textarea { min-height: 90px; }
 
-    .quick-grid, .reward-grid, .task-grid {
+    .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
       gap: 10px;
     }
 
-    .quick-btn, .reward-card, .task-card {
-      border: 1px solid var(--border);
-      background: #f9fafb;
-      border-radius: 16px;
+    .quick-btn, .primary, .danger, .success, .small-btn {
+      border: 0;
+      border-radius: 12px;
       padding: 12px;
-      text-align: left;
+      font-weight: bold;
       cursor: pointer;
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
 
-    .quick-btn:hover, .reward-card:hover, .task-card:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow);
+    .quick-btn { background: #eef2ff; }
+    .primary { background: #2563eb; color: white; width: 100%; }
+    .success { background: #16a34a; color: white; }
+    .danger { background: #dc2626; color: white; }
+    .small-btn { background: #e5e7eb; }
+
+    .request {
+      border-left: 6px solid #2563eb;
+      padding: 14px;
+      background: #f9fafb;
+      border-radius: 12px;
+      margin-bottom: 12px;
+    }
+
+    .urgent { border-left-color: #dc2626; }
+    .important { border-left-color: #f59e0b; }
+    .normal { border-left-color: #2563eb; }
+
+    .meta {
+      color: #6b7280;
+      font-size: 13px;
+      margin-bottom: 8px;
     }
 
     .points {
-      font-size: 2rem;
-      font-weight: 900;
-      color: var(--primary);
+      font-size: 26px;
+      font-weight: bold;
+      color: #2563eb;
     }
 
-    .person-row, .request-row, .history-row {
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 12px;
-      margin: 10px 0;
-      background: #ffffff;
-    }
-
-    .row-top {
+    .row {
       display: flex;
-      justify-content: space-between;
       gap: 10px;
-      align-items: center;
-    }
-
-    .badge {
-      display: inline-block;
-      border-radius: 999px;
-      padding: 4px 9px;
-      font-size: 0.8rem;
-      font-weight: 800;
-      background: #dbeafe;
-      color: #1d4ed8;
-    }
-
-    .badge.green { background: #dcfce7; color: #166534; }
-    .badge.red { background: #fee2e2; color: #991b1b; }
-    .badge.orange { background: #ffedd5; color: #9a3412; }
-    .badge.gray { background: #f3f4f6; color: #374151; }
-
-    .actions {
-      display: flex;
       flex-wrap: wrap;
-      gap: 8px;
       margin-top: 10px;
     }
 
-    .small-btn {
-      border: none;
-      border-radius: 10px;
-      padding: 8px 10px;
-      font-weight: 800;
-      cursor: pointer;
+    .tag {
+      display: inline-block;
+      background: #dbeafe;
+      color: #1e40af;
+      padding: 4px 9px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: bold;
     }
 
-    .accept { background: var(--green); color: white; }
-    .reject { background: var(--red); color: white; }
-    .archive { background: #374151; color: white; }
-    .edit { background: var(--yellow); color: #111827; }
-
-    img.preview, img.attachment {
-      max-width: 100%;
-      border-radius: 14px;
-      margin-top: 10px;
-      border: 1px solid var(--border);
-    }
-
-    .hidden { display: none !important; }
-
-    .footer-note {
+    footer {
       text-align: center;
-      padding: 20px;
-      color: var(--muted);
-    }
-
-    @media (max-width: 800px) {
-      header { padding: 18px 12px; }
-      nav { top: 80px; }
-      .span-4, .span-6, .span-8 { grid-column: span 12; }
-      .container { padding: 12px; }
+      color: #6b7280;
+      padding: 25px;
     }
   </style>
 </head>
+
 <body>
   <header>
     <h1>🏠 Family Points Hub</h1>
-    <p>Requests, chores, photo proof, points, rewards and archive.</p>
+    <p>Requests, chores, points, rewards and archive.</p>
   </header>
 
   <nav>
-    <button class="tab active" data-page="dashboard">Dashboard</button>
-    <button class="tab" data-page="requests">Requests</button>
-    <button class="tab" data-page="tasks">Earn Points</button>
-    <button class="tab" data-page="rewards">Reward Store</button>
-    <button class="tab" data-page="archive">Archive</button>
-    <button class="tab" data-page="settings">Settings</button>
+    <button class="tab active" onclick="showTab('dashboard', this)">Dashboard</button>
+    <button class="tab" onclick="showTab('requests', this)">Requests</button>
+    <button class="tab" onclick="showTab('earn', this)">Earn Points</button>
+    <button class="tab" onclick="showTab('rewards', this)">Reward Store</button>
+    <button class="tab" onclick="showTab('archive', this)">Archive</button>
+    <button class="tab" onclick="showTab('settings', this)">Settings</button>
   </nav>
 
-  <main class="container">
-    <section id="dashboard" class="page">
+  <main>
+    <section id="dashboard" class="active">
+      <div class="card">
+        <h2>👨‍👩‍👧‍👦 Current Points</h2>
+        <div id="pointsBoard" class="grid"></div>
+      </div>
+
       <div class="grid">
-        <div class="card span-12">
-          <h2>👨‍👩‍👧‍👦 Current Points</h2>
-          <div id="pointsBoard" class="grid"></div>
-        </div>
-        <div class="card span-6">
+        <div class="card">
           <h2>📌 Latest Active Requests</h2>
           <div id="latestRequests"></div>
         </div>
-        <div class="card span-6">
+
+        <div class="card">
           <h2>🏆 Leaderboard</h2>
           <div id="leaderboard"></div>
         </div>
       </div>
     </section>
 
-    <section id="requests" class="page hidden">
-      <div class="grid">
-        <div class="card span-4">
-          <h2>⚡ Quick Requests</h2>
-          <div class="quick-grid" id="quickButtons"></div>
+    <section id="requests">
+      <div class="card">
+        <h2>⚡ Quick Requests</h2>
+        <div class="quick-grid">
+          <button class="quick-btn" onclick="quickRequest('Buy Milk','Can someone help buy milk?',10,'Errand')">🛒 Buy Milk</button>
+          <button class="quick-btn" onclick="quickRequest('Buy Dinner','Can someone buy dinner?',15,'Errand')">🍔 Buy Dinner</button>
+          <button class="quick-btn" onclick="quickRequest('Fetch Me','Please fetch me. Location:',15,'Transport')">🚗 Fetch</button>
+          <button class="quick-btn" onclick="quickRequest('Send To School','Can someone send me to school?',15,'Transport')">🏫 Send To School</button>
+          <button class="quick-btn" onclick="quickRequest('Pocket Money','Can I have pocket money please? Amount:',0,'Money')">💵 Give Pocket Money</button>
+          <button class="quick-btn" onclick="quickRequest('Walk Dogs Now','Please walk Liang Liang and Jing Jing now.',25,'Dogs')">🐩 Walk Dogs Now</button>
+          <button class="quick-btn" onclick="quickRequest('Bubble Tea','Can someone buy bubble tea?',10,'Food')">🧋 Bubble Tea</button>
+          <button class="quick-btn" onclick="quickRequest('School Supplies','I need school materials.',10,'School')">📚 School Supplies</button>
         </div>
-        <div class="card span-4">
-          <h2>✍️ Custom Request</h2>
-          <label>Name</label>
-          <select id="requestName"></select>
-          <label>Type</label>
-          <select id="requestType">
-            <option>Request</option>
-            <option>Chore Proof</option>
-            <option>Reward Claim</option>
-            <option>Transport</option>
-            <option>Food</option>
-            <option>Money</option>
-            <option>School</option>
-          </select>
-          <label>Priority</label>
-          <select id="requestPriority">
-            <option>Normal</option>
-            <option>Important</option>
-            <option>Urgent</option>
-          </select>
-          <label>Message</label>
-          <textarea id="requestMessage" placeholder="Type request here..."></textarea>
-          <label>Photo Proof / Attachment</label>
-          <input type="file" id="photoInput" accept="image/*" />
-          <img id="photoPreview" class="preview hidden" />
-          <div class="actions">
-            <button class="btn primary" id="submitRequestBtn">Post Request</button>
-          </div>
-        </div>
-        <div class="card span-4">
-          <h2>📋 Active Requests</h2>
-          <p class="muted">Latest first. Accepted requests move to archive.</p>
-          <div id="requestsList"></div>
-        </div>
+      </div>
+
+      <div class="card">
+        <h2>✍️ Custom Request</h2>
+        <label>Name</label>
+        <select id="requestName">
+          <option>Aidan</option>
+          <option>Megan</option>
+          <option>Mum</option>
+          <option>Dad</option>
+        </select>
+
+        <label>Title</label>
+        <input id="requestTitle" placeholder="e.g. Walk dogs" />
+
+        <label>Message</label>
+        <textarea id="requestMessage" placeholder="Write request here..."></textarea>
+
+        <label>Category</label>
+        <select id="requestCategory">
+          <option>General</option>
+          <option>Dogs</option>
+          <option>Errand</option>
+          <option>Transport</option>
+          <option>Food</option>
+          <option>Money</option>
+          <option>School</option>
+          <option>Reward</option>
+        </select>
+
+        <label>Priority</label>
+        <select id="requestPriority">
+          <option>normal</option>
+          <option>important</option>
+          <option>urgent</option>
+        </select>
+
+        <label>Points if approved</label>
+        <input id="requestPoints" type="number" value="10" />
+
+        <label>Proof / Photo link optional</label>
+        <input id="requestProof" placeholder="Paste image link or note here" />
+
+        <button class="primary" onclick="submitRequest()">Post Request</button>
+      </div>
+
+      <div class="card">
+        <h2>📋 All Active Requests</h2>
+        <div id="allRequests"></div>
       </div>
     </section>
 
-    <section id="tasks" class="page hidden">
+    <section id="earn">
       <div class="card">
         <h2>🎯 Earn Points</h2>
-        <p class="muted">Tap a task to create a photo-proof request for approval.</p>
-        <div id="taskList" class="task-grid"></div>
+        <div class="grid" id="earnList"></div>
       </div>
     </section>
 
-    <section id="rewards" class="page hidden">
-      <div class="grid">
-        <div class="card span-8">
-          <h2>🎁 Reward Store</h2>
-          <p class="muted">Tap a reward to submit a redemption request.</p>
-          <div id="rewardStore" class="reward-grid"></div>
-        </div>
-        <div class="card span-4">
-          <h2>🧾 Points History</h2>
-          <div id="pointsHistory"></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="archive" class="page hidden">
+    <section id="rewards">
       <div class="card">
-        <h2>📦 Archive</h2>
-        <p class="muted">Accepted, rejected and archived requests are kept here.</p>
+        <h2>🎁 Reward Store</h2>
+        <div class="grid" id="rewardStore"></div>
+      </div>
+    </section>
+
+    <section id="archive">
+      <div class="card">
+        <h2>✅ Archive</h2>
         <div id="archiveList"></div>
       </div>
     </section>
 
-    <section id="settings" class="page hidden">
-      <div class="grid">
-        <div class="card span-6">
-          <h2>👤 Family Members</h2>
-          <label>New Member Name</label>
-          <input id="newMemberName" placeholder="e.g. Aidan" />
-          <div class="actions">
-            <button class="btn primary" id="addMemberBtn">Add Member</button>
-          </div>
-          <div id="membersList"></div>
-        </div>
-        <div class="card span-6">
-          <h2>🔐 Admin</h2>
-          <p class="muted">Admin PIN is required for approving, rejecting, archiving and changing points.</p>
-          <label>Admin PIN</label>
-          <input id="adminPin" type="password" placeholder="0804" />
-          <p class="muted">Default PIN in code: <b>0804</b>. Change this in <code>ADMIN_PIN</code>.</p>
-        </div>
+    <section id="settings">
+      <div class="card">
+        <h2>⚙️ Admin Settings</h2>
+        <p>Admin PIN: <b>0804</b></p>
+        <button class="danger" onclick="resetAll()">Reset All Data</button>
       </div>
     </section>
   </main>
 
-  <p class="footer-note">Install on phone through browser menu → Add to Home Screen.</p>
+  <footer>
+    Install on phone through browser menu → Add to Home Screen.
+  </footer>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
     import {
-      getFirestore, collection, addDoc, onSnapshot, updateDoc, deleteDoc,
-      doc, serverTimestamp, query, orderBy, increment, setDoc
+      getFirestore,
+      collection,
+      addDoc,
+      onSnapshot,
+      query,
+      orderBy,
+      doc,
+      updateDoc,
+      deleteDoc,
+      getDocs,
+      serverTimestamp
     } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
-    import {
-      getStorage, ref, uploadBytes, getDownloadURL
-    } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-storage.js";
 
-    // 1. Replace this with your own Firebase config.
     const firebaseConfig = {
-      apiKey: "PASTE_YOUR_API_KEY_HERE",
-      authDomain: "PASTE_YOUR_PROJECT_ID.firebaseapp.com",
-      projectId: "PASTE_YOUR_PROJECT_ID",
-      storageBucket: "PASTE_YOUR_PROJECT_ID.appspot.com",
-      messagingSenderId: "PASTE_YOUR_SENDER_ID",
-      appId: "PASTE_YOUR_APP_ID"
+      apiKey: "AIzaSyCDl-9MnO2K6MaK61pm_wi6QyJVEJVaNYI",
+      authDomain: "family-points-hub-2273a.firebaseapp.com",
+      projectId: "family-points-hub-2273a",
+      storageBucket: "family-points-hub-2273a.firebasestorage.app",
+      messagingSenderId: "183613896819",
+      appId: "1:183613896819:web:cd4d71f09a857a7eccd206"
     };
-
-    const ADMIN_PIN = "0804";
 
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
-    const storage = getStorage(app);
 
-    const defaultMembers = ["Mum", "Aidan", "Megan", "Dad"];
+    const members = ["Aidan", "Megan", "Mum", "Dad"];
+    let requests = [];
+    let points = {};
+    let archive = [];
 
-    const quickRequests = [
-      { icon: "🛒", title: "Buy Milk", message: "Can someone help buy milk?", type: "Errand" },
-      { icon: "🍔", title: "Buy Dinner", message: "Can someone buy dinner?", type: "Food" },
-      { icon: "🚗", title: "Fetch Me", message: "Please fetch me. Location:", type: "Transport" },
-      { icon: "🏫", title: "Send To School", message: "Can someone send me to school?", type: "School" },
-      { icon: "💵", title: "Give Pocket Money", message: "Can I have pocket money please? Amount:", type: "Money" },
-      { icon: "🐩", title: "Walk Dogs Now", message: "The dogs need walking now.", type: "Dog Care" },
-      { icon: "☕", title: "Bubble Tea", message: "Can I have bubble tea please?", type: "Food" },
-      { icon: "📚", title: "School Supplies", message: "I need school materials. Item:", type: "School" },
-      { icon: "🚕", title: "Book Grab", message: "Can someone help book Grab? Location:", type: "Transport" },
-      { icon: "🏥", title: "Feeling Unwell", message: "I am not feeling well. Please check on me.", type: "Health" }
-    ];
-
-    const tasks = [
-      { category: "Dogs", icon: "🐩", title: "Walk Liang Liang", points: 10 },
-      { category: "Dogs", icon: "🐩", title: "Walk Jing Jing", points: 10 },
-      { category: "Dogs", icon: "🐕", title: "Walk Both Dogs", points: 25 },
-      { category: "Dogs", icon: "🍖", title: "Feed Dogs", points: 5 },
-      { category: "Household", icon: "🍽️", title: "Wash Dishes", points: 10 },
-      { category: "Household", icon: "🧹", title: "Vacuum House", points: 15 },
-      { category: "Household", icon: "🗑️", title: "Take Out Trash", points: 10 },
-      { category: "Household", icon: "🧺", title: "Fold Laundry", points: 15 },
-      { category: "Errands", icon: "🛒", title: "Buy Milk", points: 10 },
-      { category: "Errands", icon: "🍔", title: "Buy Dinner", points: 15 },
-      { category: "Errands", icon: "📦", title: "Collect Parcel", points: 10 },
-      { category: "School", icon: "📚", title: "Homework Completed", points: 10 },
-      { category: "School", icon: "📝", title: "Revision Session", points: 10 },
-      { category: "School", icon: "🏆", title: "Good Test Result", points: 30 }
+    const earnTasks = [
+      ["🐩 Walk Liang Liang", 10],
+      ["🐩 Walk Jing Jing", 10],
+      ["🐩 Walk Both Dogs", 25],
+      ["🍚 Feed Dogs", 5],
+      ["🧹 Clean Up After Dogs", 10],
+      ["🍽️ Wash Dishes", 10],
+      ["🧼 Vacuum House", 15],
+      ["🗑️ Take Out Trash", 10],
+      ["🛏️ Clean Room", 15],
+      ["👕 Fold Laundry", 15],
+      ["🛒 Buy Milk", 10],
+      ["🍔 Buy Dinner", 15],
+      ["🛍️ Buy Groceries", 25],
+      ["📦 Collect Parcel", 10],
+      ["📚 Homework Completed", 10],
+      ["📖 Revision Session", 10],
+      ["🏆 Good Test Result", 30],
+      ["👏 Teacher Praise", 20]
     ];
 
     const rewards = [
-      { icon: "🎮", title: "Xbox Session", cost: 20 },
-      { icon: "🎮", title: "Extra Xbox Session", cost: 30 },
-      { icon: "🎮", title: "Weekend Gaming Pass", cost: 60 },
-      { icon: "🍦", title: "Ice Cream", cost: 15 },
-      { icon: "☕", title: "Bubble Tea", cost: 25 },
-      { icon: "🍔", title: "McDonald's", cost: 50 },
-      { icon: "🍽️", title: "Favourite Dinner", cost: 75 },
-      { icon: "💵", title: "$2 Bonus", cost: 20 },
-      { icon: "💵", title: "$5 Bonus", cost: 50 },
-      { icon: "💵", title: "$10 Bonus", cost: 100 },
-      { icon: "📱", title: "+30 mins Screen Time", cost: 20 },
-      { icon: "📱", title: "+1 hour Screen Time", cost: 40 },
-      { icon: "🎬", title: "Choose Family Movie", cost: 30 },
-      { icon: "😴", title: "Stay Up 1 Hour Later", cost: 40 },
-      { icon: "🎁", title: "Skip One Chore Coupon", cost: 50 }
+      ["🎮 Xbox Session", 20],
+      ["🎮 Extra Xbox Session", 30],
+      ["🎮 Weekend Gaming Pass", 60],
+      ["🍦 Ice Cream", 15],
+      ["🧋 Bubble Tea", 25],
+      ["🍔 McDonald's", 50],
+      ["🍽️ Favourite Dinner", 75],
+      ["💵 $2 Bonus", 20],
+      ["💵 $5 Bonus", 50],
+      ["💵 $10 Bonus", 100],
+      ["📱 +30 mins Screen Time", 20],
+      ["📱 +1 hour Screen Time", 40],
+      ["🎬 Choose Family Movie", 30],
+      ["🛌 Stay Up 30 mins Later", 40]
     ];
 
-    let members = [];
-    let requests = [];
-    let selectedPhotoFile = null;
+    window.showTab = function(tabId, btn) {
+      document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
+      document.querySelectorAll(".tab").forEach(b => b.classList.remove("active"));
+      document.getElementById(tabId).classList.add("active");
+      btn.classList.add("active");
+    };
 
-    const $ = id => document.getElementById(id);
-
-    function requireAdmin() {
-      if ($("adminPin").value !== ADMIN_PIN) {
-        alert("Admin PIN required. Go to Settings and enter the PIN.");
-        return false;
-      }
-      return true;
-    }
-
-    function formatDate(timestamp) {
-      if (!timestamp) return "Just now";
-      const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
-      return date.toLocaleString("en-SG", { dateStyle: "medium", timeStyle: "short" });
-    }
-
-    function setPage(page) {
-      document.querySelectorAll(".page").forEach(el => el.classList.add("hidden"));
-      document.querySelectorAll(".tab").forEach(btn => btn.classList.remove("active"));
-      $(page).classList.remove("hidden");
-      document.querySelector(`[data-page="${page}"]`).classList.add("active");
-    }
-
-    document.querySelectorAll(".tab").forEach(btn => {
-      btn.addEventListener("click", () => setPage(btn.dataset.page));
-    });
-
-    function renderMemberDropdowns() {
-      const select = $("requestName");
-      select.innerHTML = "";
-      members.forEach(m => {
-        const opt = document.createElement("option");
-        opt.value = m.name;
-        opt.textContent = m.name;
-        select.appendChild(opt);
-      });
-    }
-
-    function renderPointsBoard() {
-      const board = $("pointsBoard");
-      board.innerHTML = "";
-      members.forEach(m => {
-        const card = document.createElement("div");
-        card.className = "card span-3";
-        card.innerHTML = `<h3>${m.name}</h3><div class="points">${m.points || 0}</div><p class="muted">points</p>`;
-        board.appendChild(card);
-      });
-    }
-
-    function renderLeaderboard() {
-      const sorted = [...members].sort((a, b) => (b.points || 0) - (a.points || 0));
-      $("leaderboard").innerHTML = sorted.map((m, i) => `
-        <div class="person-row">
-          <div class="row-top"><b>${i + 1}. ${m.name}</b><span class="badge green">${m.points || 0} pts</span></div>
-        </div>
-      `).join("");
-    }
-
-    function renderMembersList() {
-      $("membersList").innerHTML = members.map(m => `
-        <div class="person-row">
-          <div class="row-top"><b>${m.name}</b><span class="badge">${m.points || 0} pts</span></div>
-        </div>
-      `).join("");
-    }
-
-    function priorityBadge(priority) {
-      if (priority === "Urgent") return "badge red";
-      if (priority === "Important") return "badge orange";
-      return "badge gray";
-    }
-
-    function renderRequestCard(r, includeActions = true) {
-      const img = r.photoUrl ? `<img class="attachment" src="${r.photoUrl}" alt="Uploaded attachment">` : "";
-      const taskPoints = r.points ? `<span class="badge green">+${r.points} pts</span>` : "";
-      const rewardCost = r.cost ? `<span class="badge orange">-${r.cost} pts</span>` : "";
-      const actions = includeActions ? `
-        <div class="actions">
-          <button class="small-btn accept" onclick="approveRequest('${r.id}')">Accept</button>
-          <button class="small-btn reject" onclick="rejectRequest('${r.id}')">Reject</button>
-          <button class="small-btn archive" onclick="archiveRequest('${r.id}')">Archive</button>
-        </div>
-      ` : "";
-      return `
-        <div class="request-row">
-          <div class="row-top">
-            <b>${r.title || r.type || "Request"}</b>
-            <span class="${priorityBadge(r.priority)}">${r.priority || r.status}</span>
-          </div>
-          <p class="muted">${r.name || "Family"} • ${r.type || "Request"} • ${formatDate(r.createdAt)}</p>
-          <p>${r.message || ""}</p>
-          ${taskPoints} ${rewardCost}
-          ${img}
-          ${actions}
-        </div>
-      `;
-    }
-
-    function renderRequests() {
-      const active = requests.filter(r => r.status === "active");
-      const archived = requests.filter(r => r.status !== "active");
-      $("requestsList").innerHTML = active.map(r => renderRequestCard(r, true)).join("") || `<p class="muted">No active requests.</p>`;
-      $("latestRequests").innerHTML = active.slice(0, 5).map(r => renderRequestCard(r, false)).join("") || `<p class="muted">No active requests.</p>`;
-      $("archiveList").innerHTML = archived.map(r => renderRequestCard(r, false)).join("") || `<p class="muted">Archive is empty.</p>`;
-    }
-
-    function renderQuickButtons() {
-      $("quickButtons").innerHTML = quickRequests.map((q, i) => `
-        <button class="quick-btn" onclick="quickRequest(${i})">
-          <div style="font-size:1.6rem">${q.icon}</div>
-          <b>${q.title}</b>
-          <p class="muted">${q.type}</p>
-        </button>
-      `).join("");
-    }
-
-    function renderTasks() {
-      $("taskList").innerHTML = tasks.map((t, i) => `
-        <button class="task-card" onclick="taskRequest(${i})">
-          <div style="font-size:1.8rem">${t.icon}</div>
-          <b>${t.title}</b>
-          <p class="muted">${t.category}</p>
-          <span class="badge green">+${t.points} pts</span>
-        </button>
-      `).join("");
-    }
-
-    function renderRewards() {
-      $("rewardStore").innerHTML = rewards.map((r, i) => `
-        <button class="reward-card" onclick="rewardRequest(${i})">
-          <div style="font-size:1.8rem">${r.icon}</div>
-          <b>${r.title}</b>
-          <p class="muted">Redeem reward</p>
-          <span class="badge orange">${r.cost} pts</span>
-        </button>
-      `).join("");
-    }
-
-    function renderPointsHistory() {
-      const history = requests
-        .filter(r => r.status === "accepted" && (r.points || r.cost))
-        .slice(0, 20)
-        .map(r => `
-          <div class="history-row">
-            <b>${r.name}</b><br>
-            ${r.points ? `+${r.points} pts` : `-${r.cost} pts`} • ${r.title}<br>
-            <span class="muted">${formatDate(r.updatedAt || r.createdAt)}</span>
-          </div>
-        `).join("");
-      $("pointsHistory").innerHTML = history || `<p class="muted">No points history yet.</p>`;
-    }
-
-    async function uploadPhoto(file) {
-      if (!file) return "";
-      const filename = `${Date.now()}-${file.name}`;
-      const storageRef = ref(storage, `family-uploads/${filename}`);
-      await uploadBytes(storageRef, file);
-      return await getDownloadURL(storageRef);
-    }
-
-    async function createRequest(data) {
+    window.quickRequest = async function(title, message, pts, category) {
+      const name = prompt("Who is making this request?", "Aidan") || "Aidan";
       await addDoc(collection(db, "requests"), {
-        ...data,
+        name,
+        title,
+        message,
+        category,
+        priority: title.includes("Now") ? "urgent" : "normal",
+        points: pts,
+        proof: "",
         status: "active",
-        createdAt: serverTimestamp(),
-        updatedAt: serverTimestamp()
+        createdAt: serverTimestamp()
       });
-    }
-
-    window.quickRequest = async function(index) {
-      const q = quickRequests[index];
-      const name = $("requestName").value || "Family";
-      await createRequest({
-        name,
-        title: `${q.icon} ${q.title}`,
-        type: q.type,
-        priority: q.title.includes("Now") ? "Urgent" : "Normal",
-        message: q.message
-      });
-      setPage("requests");
     };
 
-    window.taskRequest = async function(index) {
-      const t = tasks[index];
-      const name = $("requestName").value || "Aidan";
-      await createRequest({
-        name,
-        title: `${t.icon} ${t.title}`,
-        type: "Chore Proof",
-        priority: "Normal",
-        message: `Completed task: ${t.title}. Please approve for +${t.points} points.`,
-        points: t.points
-      });
-      setPage("requests");
-    };
+    window.submitRequest = async function() {
+      const name = document.getElementById("requestName").value;
+      const title = document.getElementById("requestTitle").value.trim();
+      const message = document.getElementById("requestMessage").value.trim();
+      const category = document.getElementById("requestCategory").value;
+      const priority = document.getElementById("requestPriority").value;
+      const pts = Number(document.getElementById("requestPoints").value || 0);
+      const proof = document.getElementById("requestProof").value.trim();
 
-    window.rewardRequest = async function(index) {
-      const r = rewards[index];
-      const name = $("requestName").value || "Aidan";
-      await createRequest({
-        name,
-        title: `${r.icon} ${r.title}`,
-        type: "Reward Claim",
-        priority: "Normal",
-        message: `I would like to redeem: ${r.title}. Cost: ${r.cost} points.`,
-        cost: r.cost
-      });
-      setPage("requests");
-    };
-
-    $("photoInput").addEventListener("change", e => {
-      selectedPhotoFile = e.target.files[0];
-      if (selectedPhotoFile) {
-        $("photoPreview").src = URL.createObjectURL(selectedPhotoFile);
-        $("photoPreview").classList.remove("hidden");
+      if (!title || !message) {
+        alert("Please fill in title and message.");
+        return;
       }
-    });
 
-    $("submitRequestBtn").addEventListener("click", async () => {
-      const message = $("requestMessage").value.trim();
-      if (!message) return alert("Please type a message.");
-      const btn = $("submitRequestBtn");
-      btn.disabled = true;
-      btn.textContent = "Uploading...";
-      try {
-        const photoUrl = await uploadPhoto(selectedPhotoFile);
-        await createRequest({
-          name: $("requestName").value,
-          title: $("requestType").value,
-          type: $("requestType").value,
-          priority: $("requestPriority").value,
-          message,
-          photoUrl
-        });
-        $("requestMessage").value = "";
-        $("photoInput").value = "";
-        $("photoPreview").classList.add("hidden");
-        selectedPhotoFile = null;
-      } catch (err) {
-        alert("Error posting request: " + err.message);
-      } finally {
-        btn.disabled = false;
-        btn.textContent = "Post Request";
-      }
-    });
+      await addDoc(collection(db, "requests"), {
+        name,
+        title,
+        message,
+        category,
+        priority,
+        points: pts,
+        proof,
+        status: "active",
+        createdAt: serverTimestamp()
+      });
 
-    window.approveRequest = async function(id) {
-      if (!requireAdmin()) return;
-      const r = requests.find(x => x.id === id);
-      if (!r) return;
-      const member = members.find(m => m.name === r.name);
-      if (member && r.points) await updateDoc(doc(db, "members", member.id), { points: increment(r.points) });
-      if (member && r.cost) await updateDoc(doc(db, "members", member.id), { points: increment(-r.cost) });
+      document.getElementById("requestTitle").value = "";
+      document.getElementById("requestMessage").value = "";
+      document.getElementById("requestProof").value = "";
+    };
+
+    window.approveRequest = async function(id, name, pts) {
+      const pin = prompt("Enter Admin PIN");
+      if (pin !== "0804") return alert("Wrong PIN.");
+
       await updateDoc(doc(db, "requests", id), {
         status: "accepted",
-        updatedAt: serverTimestamp()
+        acceptedAt: serverTimestamp()
+      });
+
+      await addDoc(collection(db, "points"), {
+        name,
+        points: pts,
+        reason: "Approved request",
+        createdAt: serverTimestamp()
       });
     };
 
     window.rejectRequest = async function(id) {
-      if (!requireAdmin()) return;
+      const pin = prompt("Enter Admin PIN");
+      if (pin !== "0804") return alert("Wrong PIN.");
       await updateDoc(doc(db, "requests", id), {
         status: "rejected",
-        updatedAt: serverTimestamp()
+        acceptedAt: serverTimestamp()
       });
     };
 
-    window.archiveRequest = async function(id) {
-      if (!requireAdmin()) return;
-      await updateDoc(doc(db, "requests", id), {
-        status: "archived",
-        updatedAt: serverTimestamp()
+    window.claimTask = async function(task, pts) {
+      const name = prompt("Who completed this task?", "Aidan") || "Aidan";
+      await addDoc(collection(db, "requests"), {
+        name,
+        title: task,
+        message: "Task completed. Please approve points.",
+        category: "Earn Points",
+        priority: "normal",
+        points: pts,
+        proof: "",
+        status: "active",
+        createdAt: serverTimestamp()
       });
     };
 
-    $("addMemberBtn").addEventListener("click", async () => {
-      if (!requireAdmin()) return;
-      const name = $("newMemberName").value.trim();
-      if (!name) return;
-      await addDoc(collection(db, "members"), { name, points: 0, createdAt: serverTimestamp() });
-      $("newMemberName").value = "";
-    });
+    window.redeemReward = async function(reward, cost) {
+      const name = prompt("Who wants to redeem this reward?", "Aidan") || "Aidan";
+      await addDoc(collection(db, "requests"), {
+        name,
+        title: reward,
+        message: `Request to redeem reward for ${cost} points.`,
+        category: "Reward",
+        priority: "normal",
+        points: -cost,
+        proof: "",
+        status: "active",
+        createdAt: serverTimestamp()
+      });
+    };
 
-    async function seedMembersIfEmpty(snapshot) {
-      if (!snapshot.empty) return;
-      for (const name of defaultMembers) {
-        await addDoc(collection(db, "members"), { name, points: name === "Mum" ? 9999 : 0, createdAt: serverTimestamp() });
-      }
+    window.resetAll = async function() {
+      const pin = prompt("Enter Admin PIN");
+      if (pin !== "0804") return alert("Wrong PIN.");
+
+      if (!confirm("Delete all requests and points?")) return;
+
+      const reqSnap = await getDocs(collection(db, "requests"));
+      reqSnap.forEach(d => deleteDoc(doc(db, "requests", d.id)));
+
+      const ptsSnap = await getDocs(collection(db, "points"));
+      ptsSnap.forEach(d => deleteDoc(doc(db, "points", d.id)));
+
+      alert("Reset complete.");
+    };
+
+    function formatDate(data) {
+      if (!data.createdAt || !data.createdAt.toDate) return "Just now";
+      return data.createdAt.toDate().toLocaleString("en-SG", {
+        day: "2-digit",
+        month: "short",
+        hour: "2-digit",
+        minute: "2-digit"
+      });
     }
 
-    onSnapshot(query(collection(db, "members"), orderBy("createdAt", "asc")), async snap => {
-      await seedMembersIfEmpty(snap);
-      members = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-      renderMemberDropdowns();
-      renderPointsBoard();
-      renderLeaderboard();
-      renderMembersList();
-    });
+    function renderRequest(r, showButtons = true) {
+      const cls = r.priority || "normal";
+      return `
+        <div class="request ${cls}">
+          <div class="meta">${formatDate(r)} • ${r.name} • ${r.category || "General"}</div>
+          <h3>${r.title}</h3>
+          <p>${r.message}</p>
+          ${r.proof ? `<p><span class="tag">Proof</span> ${r.proof}</p>` : ""}
+          <p><b>Points:</b> ${r.points}</p>
+          ${showButtons ? `
+            <div class="row">
+              <button class="success" onclick="approveRequest('${r.id}','${r.name}',${r.points})">Approve</button>
+              <button class="danger" onclick="rejectRequest('${r.id}')">Reject</button>
+            </div>
+          ` : ""}
+        </div>
+      `;
+    }
 
-    onSnapshot(query(collection(db, "requests"), orderBy("createdAt", "desc")), snap => {
-      requests = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-      renderRequests();
-      renderPointsHistory();
-    });
+    function render() {
+      const active = requests.filter(r => r.status === "active");
+      archive = requests.filter(r => r.status !== "active");
 
-    renderQuickButtons();
-    renderTasks();
-    renderRewards();
+      document.getElementById("latestRequests").innerHTML =
+        active.slice(0, 5).map(r => renderRequest(r)).join("") || "No active requests.";
+
+      document.getElementById("allRequests").innerHTML =
+        active.map(r => renderRequest(r)).join("") || "No active requests.";
+
+      document.getElementById("archiveList").innerHTML =
+        archive.map(r => renderRequest(r, false)).join("") || "Archive is empty.";
+
+      document.getElementById("pointsBoard").innerHTML = members.map(m => `
+        <div class="card">
+          <h3>${m}</h3>
+          <div class="points">${points[m] || 0} pts</div>
+        </div>
+      `).join("");
+
+      const sorted = [...members].sort((a,b) => (points[b] || 0) - (points[a] || 0));
+      document.getElementById("leaderboard").innerHTML = sorted.map((m, i) => `
+        <p><b>${i + 1}. ${m}</b> — ${points[m] || 0} pts</p>
+      `).join("");
+    }
+
+    function renderStaticLists() {
+      document.getElementById("earnList").innerHTML = earnTasks.map(([task, pts]) => `
+        <div class="card">
+          <h3>${task}</h3>
+          <p><b>Earn:</b> ${pts} pts</p>
+          <button class="primary" onclick="claimTask('${task}',${pts})">Claim Points</button>
+        </div>
+      `).join("");
+
+      document.getElementById("rewardStore").innerHTML = rewards.map(([reward, cost]) => `
+        <div class="card">
+          <h3>${reward}</h3>
+          <p><b>Cost:</b> ${cost} pts</p>
+          <button class="primary" onclick="redeemReward('${reward}',${cost})">Redeem</button>
+        </div>
+      `).join("");
+    }
+
+    onSnapshot(
+      query(collection(db, "requests"), orderBy("createdAt", "desc")),
+      snapshot => {
+        requests = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+        render();
+      }
+    );
+
+    onSnapshot(
+      query(collection(db, "points"), orderBy("createdAt", "desc")),
+      snapshot => {
+        points = {};
+        members.forEach(m => points[m] = 0);
+        snapshot.docs.forEach(d => {
+          const data = d.data();
+          points[data.name] = (points[data.name] || 0) + Number(data.points || 0);
+        });
+        render();
+      }
+    );
+
+    renderStaticLists();
+    render();
   </script>
 </body>
 </html>
