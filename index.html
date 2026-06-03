@@ -251,7 +251,7 @@
           <option>urgent</option>
         </select>
 
-        <label>Points if accepted</label>
+        <label>Points if verified</label>
         <input id="requestPoints" type="number" value="10" />
 
         <label>Proof / Photo link optional</label>
@@ -282,7 +282,7 @@
 
     <section id="archive">
       <div class="card">
-        <h2>✅ Accepted / Rejected Archive</h2>
+        <h2>✅ Verified / Rejected Archive</h2>
         <div id="archiveList"></div>
       </div>
     </section>
@@ -429,36 +429,48 @@
     };
 
     window.approveRequest = async function(id, name, pts) {
-      const defaultName = document.getElementById("currentUser").value || "Family Member";
-      const acceptedBy = prompt("Who is accepting this request?", defaultName);
 
-      if (!acceptedBy || acceptedBy.trim() === "") return;
+      const pin = prompt("Parent Verification PIN");
+
+      if (pin !== "0804") {
+        alert("Verification failed");
+        return;
+      }
+
+      const verifiedBy = prompt("Verified by?", "Mum") || "Parent";
 
       await updateDoc(doc(db, "requests", id), {
         status: "accepted",
-        acceptedBy: acceptedBy.trim(),
+        acceptedBy: verifiedBy,
         acceptedAt: serverTimestamp()
       });
 
       await addDoc(collection(db, "points"), {
         name,
         points: pts,
-        reason: "Accepted by " + acceptedBy.trim(),
+        reason: "Verified by " + verifiedBy,
         createdAt: serverTimestamp()
       });
+
     };
 
     window.rejectRequest = async function(id) {
-      const defaultName = document.getElementById("currentUser").value || "Family Member";
-      const rejectedBy = prompt("Who is rejecting this request?", defaultName);
 
-      if (!rejectedBy || rejectedBy.trim() === "") return;
+      const pin = prompt("Parent Verification PIN");
+
+      if (pin !== "0804") {
+        alert("Verification failed");
+        return;
+      }
+
+      const rejectedBy = prompt("Rejected by?", "Mum") || "Parent";
 
       await updateDoc(doc(db, "requests", id), {
         status: "rejected",
-        rejectedBy: rejectedBy.trim(),
+        rejectedBy: rejectedBy,
         acceptedAt: serverTimestamp()
       });
+
     };
 
     window.claimTask = async function(task, pts) {
@@ -466,7 +478,7 @@
       await addDoc(collection(db, "requests"), {
         name,
         title: task,
-        message: "Task completed. Please accept to award points.",
+        message: "Task completed. Please verify to award points.",
         category: "Earn Points",
         priority: "normal",
         points: pts,
@@ -539,7 +551,7 @@
     function renderRequest(r, showButtons = true) {
       const cls = r.priority || "normal";
       const statusLine = r.status === "accepted"
-        ? `<p><span class="tag">Accepted</span> Accepted by ${r.acceptedBy || "Family Member"} ${formatAcceptedDate(r) ? "• " + formatAcceptedDate(r) : ""}</p>`
+        ? `<p><span class="tag">Verified</span> Verified by ${r.acceptedBy || "Parent"} ${formatAcceptedDate(r) ? "• " + formatAcceptedDate(r) : ""}</p>`
         : r.status === "rejected"
           ? `<p><span class="tag">Rejected</span> Rejected by ${r.rejectedBy || "Family Member"} ${formatAcceptedDate(r) ? "• " + formatAcceptedDate(r) : ""}</p>`
           : "";
@@ -554,8 +566,8 @@
           ${statusLine}
           ${showButtons ? `
             <div class="row">
-              <button class="success" onclick="approveRequest('${r.id}','${r.name}',${r.points})">✅ I'll Do It</button>
-              <button class="danger" onclick="rejectRequest('${r.id}')">❌ Can't Do It</button>
+              <button class="success" onclick="approveRequest('${r.id}','${r.name}',${r.points})">✅ Verify & Award Points</button>
+              <button class="danger" onclick="rejectRequest('${r.id}')">❌ Reject Request</button>
             </div>
           ` : ""}
         </div>
